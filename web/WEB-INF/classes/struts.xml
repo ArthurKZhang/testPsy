@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- 常量 -->
+    <!-- 禁止动态方法调用 -->
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <!-- 开发模式 -->
+    <constant name="struts.devMode" value="false" />
+
+    <!--
+        package:包
+        name:包名
+        namespace:命名空间
+        extends:继承
+     -->
+    <package name="default" namespace="/" extends="struts-default">
+        <!-- 全局结果集配置 -->
+        <global-results>
+            <!-- 全局的错误路径配置 -->
+            <result name="error">/error.jsp</result>
+        </global-results>
+        <!-- 全局异常处理映射 -->
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>
+    </package>
+
+    <package name="user" namespace="/user" extends="default">
+
+        <action name="loginAction" class="com.psy.action.UserLoginAction" method="login">
+            <!-- 返回值为success,重定向到WebRoot下的index.jsp -->
+            <result name="success" type="redirect">/pages/login_success.jsp</result>
+            <!-- 返回值为login,转发到login.jsp页面 -->
+            <result name="login" type="redirect">/pages/login_fail.jsp</result>
+        </action>
+        <action name="registerAction" class="com.psy.action.UserRegisterAction" method="register">
+            <!-- 返回值为success,重定向到WebRoot下的index.jsp -->
+            <result name="success" type="redirect">/pages/register_success.jsp</result>
+            <!-- 返回值为login,转发到login.jsp页面 -->
+            <result name="register" type="redirect">/pages/register_fail.jsp</result>
+        </action>
+    </package>
+
+</struts>
